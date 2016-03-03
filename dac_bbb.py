@@ -3,7 +3,7 @@ import numpy as np
 import time
 
 
-class DAC:
+class dac_bbb:
     
     RESOLUTION = 2**12 - 1
     WRITE_REGISTER = 0x40
@@ -29,12 +29,12 @@ class DAC:
         self.send_voltage(bits)
 
 
-def test_run():
-    dac = DAC()
+def gen_wave():
+    mydac = dac_bbb()
     # sin(t*f*2*pi) w\ f = frequency
     sig = lambda t: 50*np.sin(t*5*2*np.pi) + 50
     start_time = time.time()
 
     while True:
         dac.set_voltage(sig(time.time()-start_time))
-test_run()
+gen_wave()
